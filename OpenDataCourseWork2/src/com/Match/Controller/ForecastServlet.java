@@ -129,7 +129,7 @@ public class ForecastServlet extends HttpServlet {
 					//Check whether the name is null;
 					String homeTeam = request.getParameter("HomeTeam");
 					String awayTeam = request.getParameter("AwayTeam");
-					System.out.println("The forecast servlet:"+homeTeam+"||"+ awayTeam);
+					
 					//Set the parameter session for pk section
 					//request.getSession().setAttribute("jump", "yes");
 				//Call the query method in Dao to get the match statistic data
@@ -173,6 +173,9 @@ public class ForecastServlet extends HttpServlet {
 					request.getSession().setAttribute("winningChanceOfAwayTeam", winningChanceOfAwayTeam);
 					request.getSession().setAttribute("drawChance", drawChance);
 					request.getSession().setAttribute("matchAgainstResult", matchResultList);
+					request.getSession().setAttribute("homeTeamName", homeTeam);
+					request.getSession().setAttribute("awayTeamName", awayTeam);
+					//response.addHeader ("refresh", "60;URL=forecast.jsp?jump=yes&color=yes#pk");
 					response.sendRedirect("forecast.jsp?jump=yes&color=yes#pk");
 	}
 

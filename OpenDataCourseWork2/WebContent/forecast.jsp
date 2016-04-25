@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="assets/images/logo-1050x1050-40.png" type="image/x-icon">
   <meta name="description" content="">
-<!--   <link href="assets/bootstrap.css" rel="stylesheet"> -->
+   <link href="bootstrap.css" rel="stylesheet"> 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,400&amp;subset=cyrillic,latin,greek,vietnamese">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-select.css">
@@ -244,8 +244,8 @@
   <script src="assets/mobirise/js/script.js"></script>
   
   <script src="http://d3js.org/d3.v3.min.js"></script>
-    <!-- <script src="assets/jquery.js"></script>
-    <script src="assets/bootstrap.js"></script> -->
+     <script src="jquery.js"></script>
+    <script src="bootstrap.js"></script>
     <script>
     var jump1 = '<%=request.getParameter("jump")%>';
     if (jump1 == 'yes'){
@@ -275,10 +275,10 @@
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    //数据字典映射
+    
     var dataMaps = {
-      "FTHG":"FullTimeHomeTeamGoals",
-      "FTAG":"FullTimeAwayTeamGoals"
+      "FTHG":"FTHG",
+      "FTAG":"FTAG"
     }
 
     d3.csv("goalData.csv", function (error, data) {

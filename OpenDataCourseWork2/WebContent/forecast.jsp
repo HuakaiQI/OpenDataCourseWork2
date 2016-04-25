@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="assets/mobirise/css/style.css">
   <link rel="stylesheet" href="assets/animate.css/animate.min.css">
   <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
-  
+
 
   
   
@@ -198,7 +198,7 @@
             <div id="mdata">
                 <table border="0" class="table table-striped table-hover" style="table-layout:fixed;; word-wrap:break-word;">
                     <tr>
-                        <th>Div</th>
+                        <th>Season</th>
                         <th>Date</th>
                         <th>Home Team</th>
                         <th>Away Team</th>
@@ -248,6 +248,8 @@
     <script src="bootstrap.js"></script>
     <script>
     var jump1 = '<%=request.getParameter("jump")%>';
+    var homeTeamMatch = '<%=request.getSession().getAttribute("homeTeamName")%>';
+    var awayTeamMatch = '<%=request.getSession().getAttribute("awayTeamName")%>';
     if (jump1 == 'yes'){
     	var margin = {top: 20, right: 55, bottom: 30, left: 40},
         width  = 600 - margin.left - margin.right,
@@ -281,7 +283,7 @@
       "FTAG":"FTAG"
     }
 
-    d3.csv("goalData.csv", function (error, data) {
+    d3.csv("DATA/"+homeTeamMatch+"_"+awayTeamMatch+".csv", function (error, data) {
 
       var labelVar = 'Date';
       var varNames = ['FTHG','FTAG'];
@@ -395,8 +397,10 @@
      awayvalue = $("#as option:selected").text();
      homewin = document.getElementById("homewinrate").innerText;
      awaywin = document.getElementById("awaywinrate").innerText;
+     
 	if(jump =='yes'){
 		  $("#pk").fadeIn("slow");
+		
 	}
 	if(color=='yes'){
 		if (homewin>awaywin){

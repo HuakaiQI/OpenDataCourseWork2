@@ -94,30 +94,7 @@ public class ForecastServlet extends HttpServlet {
 			String drwaChance = numberFormat.format((1-(float)24.5/100+(float)0.39/100 * (float)ratingSubtraction-((float)(44.8)/100+(float)(0.53/100) * (float)ratingSubtraction))*100)+"%";
 			return drwaChance;
 		}
-	/**
-	 * Define a function to print the data containing goal number to .csv file
-	 */
-		public void printToFile(List<Match> matchList) {
-			PrintStream dataConsole;
-			try {
-				dataConsole = new PrintStream(new File("E:/Southampton Master/Msc Degree/Github/OpendataCoursework/OpenDataCourseWork2/WebContent/goalData.csv"));
-				System.setOut(dataConsole);
-				//Print the row name on the first line
-				dataConsole.println("Season"+","+"Date"+","+"HomeTeam"+","+"AwayTeam"+","+"FTHG"+","+"FTAG"+","+"FTR");
-				for(int i = 0;i < matchList.size();i++){
-					dataConsole.println(matchList.get(i).getSeason()+","+matchList.get(i).getDate()+","+
-										matchList.get(i).getHomeTeam()+","+matchList.get(i).getAwayTeam()+","+
-										matchList.get(i).getFTHG()+","+matchList.get(i).getFTAG()+","+
-										matchList.get(i).getFullTimeResult());
-				}
-				
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-		}
+
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -165,8 +142,8 @@ public class ForecastServlet extends HttpServlet {
 				 * Get the matches result of two particular teams and print the result to a csv file
 				 */
 					List<Match> matchResultList = new ArrayList<>();
+					
 					matchResultList = forecastDao.queryMatchesOfTwoTeams(homeTeam, awayTeam);
-					printToFile(matchResultList);
 					
 				//Store the result data into session
 					request.getSession().setAttribute("winningChanceOfHomeTeam", winningChanceOfHomeTeam);
@@ -175,8 +152,13 @@ public class ForecastServlet extends HttpServlet {
 					request.getSession().setAttribute("matchAgainstResult", matchResultList);
 					request.getSession().setAttribute("homeTeamName", homeTeam);
 					request.getSession().setAttribute("awayTeamName", awayTeam);
+					
 					//response.addHeader ("refresh", "60;URL=forecast.jsp?jump=yes&color=yes#pk");
+					response.setHeader("Refresh", "5;url=forecast.jsp?jump=yes&color=yes#pk");
 					response.sendRedirect("forecast.jsp?jump=yes&color=yes#pk");
+						
+					
+				
 	}
 
 }
